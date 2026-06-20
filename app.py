@@ -38,40 +38,52 @@ st.markdown("""
     .main {
         background-color: #0e1117;
     }
+
     .stMetric {
         background: rgba(255, 255, 255, 0.05);
         padding: 20px;
         border-radius: 15px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.08);
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        backdrop-filter: blur(10px);
     }
+
     .stMetric:hover {
-        border: 1px solid rgba(0, 255, 255, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.15);
         transform: translateY(-2px);
         transition: all 0.3s ease;
     }
-    .css-1r6slb0 { /* Container background */
+
+    .css-1r6slb0 {
         background: rgba(255, 255, 255, 0.02);
         padding: 2rem;
         border-radius: 20px;
     }
+
     h1 {
-        background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        font-weight: 800;
+        color: #f5f5f5;
+        font-weight: 700;
+        font-size: 42px;
+        letter-spacing: 0.5px;
+        margin-bottom: 10px;
     }
+
+    p {
+        color: #b0b3b8;
+        font-size: 15px;
+    }
+
     .stHeader {
-        color: #00d4ff;
+        color: #dcdcdc;
     }
+
     div[data-testid="stExpander"] {
         background: rgba(255, 255, 255, 0.03);
         border-radius: 10px;
         border: none;
     }
+
     </style>
-    """, unsafe_allow_html=True)
+""", unsafe_allow_html=True)
 
 
 # =========================================================
@@ -134,8 +146,6 @@ col3.metric("Average Workload", round(df['Assigned_Hours'].mean(), 2))
 # =========================================================
 # UI CONTAINERS (Define Layout Order)
 # =========================================================
-# By defining containers here, we can collect all inputs, do the math once, 
-# and then inject the results perfectly into the correct visual layout!
 
 ui_emp_intel_header = st.container()
 ui_emp_details = st.container()
@@ -302,7 +312,7 @@ with ui_emp_results:
     st.subheader("📊 Employee Prediction Results")
     col_emp1, col_emp2, col_emp3 = st.columns(3)
     col_emp1.metric("Future Workload", round(employee_future_workload, 2))
-    col_emp2.metric("Employee Risk (Deep Learning)", f"{employee_risk * 100:.2f}%")
+    col_emp2.metric("Employee Risk", f"{employee_risk * 100:.2f}%")
     col_emp3.metric("Stress Status", "High" if employee_stress else "Normal")
 
     st.subheader("💡 Employee Recommendation")
@@ -350,7 +360,7 @@ with ui_org_intel:
     st.header("🏢 Organization Intelligence")
     col_org1, col_org2, col_org3 = st.columns(3)
     col_org1.metric("Organization Workload", round(org_future_workload, 2))
-    col_org2.metric("Organization Risk (Deep Learning)", f"{org_risk * 100:.2f}%")
+    col_org2.metric("Organization Risk", f"{org_risk * 100:.2f}%")
     col_org3.metric("Employees Under Stress", int(org_stress_count))
 
     st.subheader("🔥 Organization Risk Heatmap")
@@ -450,38 +460,38 @@ with ui_eval:
     st.warning(model_insights['class_imbalance_note'])
     st.info(model_insights['prototype_note'])
 
-    st.header("🏗️ System Architecture")
-    st.markdown("""
-### Workflow Pipeline
-1. HR Dataset Input
-2. Data Preprocessing
-3. Feature Engineering
-4. Employee Intelligence
-5. Project Intelligence
-6. Organization Intelligence
-7. ML Prediction Models
-8. Workforce Risk Analysis
-9. Resource Optimization
-10. Analytics Dashboard
+#     st.header("🏗️ System Architecture")
+#     st.markdown("""
+# ### Workflow Pipeline
+# 1. HR Dataset Input
+# 2. Data Preprocessing
+# 3. Feature Engineering
+# 4. Employee Intelligence
+# 5. Project Intelligence
+# 6. Organization Intelligence
+# 7. ML Prediction Models
+# 8. Workforce Risk Analysis
+# 9. Resource Optimization
+# 10. Analytics Dashboard
 
----
+# ---
 
-### AI Components & Architecture
-- Machine Learning (Linear Regression) → Future Workload Forecasting
-- ML Classification (Logistic Regression) → Workforce Risk Prediction (High Precision)
-- Explainable AI (Decision Tree) → Model Interpretability (XAI)
-- FastAPI REST Microservice → Enterprise Backend Integration
-- Decision Engine → AI Recommendations
-- Optimization Engine → Resource Allocation
+# ### AI Components & Architecture
+# - Machine Learning (Linear Regression) → Future Workload Forecasting
+# - ML Classification (Logistic Regression) → Workforce Risk Prediction (High Precision)
+# - Explainable AI (Decision Tree) → Model Interpretability (XAI)
+# - FastAPI REST Microservice → Enterprise Backend Integration
+# - Decision Engine → AI Recommendations
+# - Optimization Engine → Resource Allocation
 
----
+# ---
 
-### Business Goals
-- Workforce forecasting
-- Workforce optimization
-- Operational stress detection
-- Workforce risk analysis
-- Project staffing analysis
-- Resource capacity planning
-- Skill gap analysis
-""")
+# ### Business Goals
+# - Workforce forecasting
+# - Workforce optimization
+# - Operational stress detection
+# - Workforce risk analysis
+# - Project staffing analysis
+# - Resource capacity planning
+# - Skill gap analysis
+# """)
